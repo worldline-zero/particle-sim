@@ -10,5 +10,5 @@ $ make
 ## Run
 
 ```
-$ ./particle-sim
+$ ./particle-sim <PARTICLE-COUNT>
 ```

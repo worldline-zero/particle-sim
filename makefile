@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wimplicit-fallthrough -g -msse
 
 SRC = ./src/* ./lib/src/gl.c
 
-OBJNAME = main
+OBJNAME = particle-sim
 
 LDFLAGS = -lglfw -lGL -ldl
 

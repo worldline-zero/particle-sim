@@ -12,7 +12,6 @@ static void framebuffer_size_callback(GLFWwindow *window, int w, int h) {
 }
 
 static void cursor_pos_callback(GLFWwindow *w, double xpos, double ypos) {
-  printf("%f, %f\n", cursor.x, cursor.y);
   cursor.x = ((float)xpos/(float)width) * 2.0f - 1.0f;
   cursor.y = 1.0f - ((float)ypos/(float)height) * 2.0f;
 }

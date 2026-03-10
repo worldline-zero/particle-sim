@@ -25,6 +25,14 @@ void draw_particle(struct particle p, unsigned int vao, unsigned int program) {
   glUseProgram(0);
 }
 
+void draw_particles(unsigned int vao, unsigned int program, unsigned int count) {
+  glUseProgram(program);
+  glBindVertexArray(vao);
+  glDrawArraysInstanced(GL_POINTS, 0, 1, count);
+  glBindVertexArray(0);
+  glUseProgram(0);
+}
+
 struct particle generate_particle() {
   float random1 = (rand() % 1000) / 500.0f;
   float random2 = (rand() % 1000) / 500.0f;

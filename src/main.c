@@ -12,18 +12,35 @@
 #include "../inc/ssbo.h"
 #include "../inc/particle.h"
 
-#define TOTAL_PARTICLES 3000
+unsigned int TOTAL_PARTICLES = 10000;
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
 extern struct vec4 cursor;
 
-int main() {
+int main(int argc, char **argv) {
+
+  if (argc > 1) {
+    TOTAL_PARTICLES = atoi(argv[1]);
+    if (TOTAL_PARTICLES % 1000 != 0) {
+      printf("Particle count must be multiple of 1000\n");
+      return 0;
+    }
+  } else {
+    printf("Usage: particle-sim <COUNT>\n");
+    return 0;
+  }
+
+  printf("Tip: try clicking with your mouse to manipulate the particles!\n");
 
   if (!glfwInit()) {
     fprintf(stderr, "failed to initialise GLFW\n");
     exit(1);
+  }
+
+  if (argc > 1) {
+    TOTAL_PARTICLES = atoi(argv[1]);
   }
 
   GLFWwindow *window = make_window(SCREEN_WIDTH, SCREEN_HEIGHT, VISIBLE);
@@ -67,9 +84,11 @@ int main() {
     glClearColor(8.0f/255.0f, 8.0f/255.0f, 8.0f/255.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    for (int i = 0; i<TOTAL_PARTICLES; i++) {
-      draw_particle(particles[i], p_vao, basic_program);
-    }
+    //for (int i = 0; i<TOTAL_PARTICLES; i++) {
+    //  draw_particle(particles[i], p_vao, basic_program);
+    //}
+
+    draw_particles(p_vao, basic_program, TOTAL_PARTICLES);
 
     glUseProgram(update_program);
     glUniform4fv(glGetUniformLocation(update_program, "cursor"), 1, (float*)&cursor);

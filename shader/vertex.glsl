@@ -7,13 +7,17 @@ struct particle {
   vec4 velocity;
 };
 
+layout (std430, binding = 2) volatile buffer particle_data {
+  particle particles[];
+};
+
 out vec4 vp;
 out vec4 vel;
 
 uniform particle p;
 
 void main() {
-  vp = (position + p.position) * 0.4f;
-  vel = p.velocity;
+  vp = (position + particles[gl_InstanceID].position) * 0.4f;
+  vel = particles[gl_InstanceID].velocity;
   gl_Position = vp;
 }
